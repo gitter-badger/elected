@@ -61,21 +61,5 @@ module Elected
       it('error  ') { expect_class_log_msg :err, 'erroring ...' }
     end
 
-    def expect_instance_log_msg(logr_meth, msg)
-      subject.send logr_meth
-      expect_log_line "#{subject.class.name}.#{logr_meth} | #{msg}"
-    end
-
-    def expect_class_log_msg(logr_meth, msg)
-      subject.class.send logr_meth
-      expect_log_line "#{subject.class.name}.#{logr_meth} | #{msg}"
-    end
-
-    def expect_log_line(msg)
-      expect($logger.has_line?(msg)).to eq(true),
-                                        "expected #{$logger.lines.inspect}\n" +
-                                          "to have  [#{msg}]"
-
-    end
   end
 end

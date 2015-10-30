@@ -41,33 +41,6 @@ module TestingHelpers
 
   end
 
-  # Setup defaults for testing
-  before(:each) do
-    Elected.key        = DEFAULT_KEY
-    Elected.timeout    = DEFAULT_TIMEOUT
-    Elected.redis_urls = ENV.fetch 'REDIS_URL', 'redis://localhost:6379/15'
-  end
-
-  # Get a inspectable logger
-  before(:each, logging: true) do
-    $logger        = TestLogger.new
-    Elected.logger = $logger
-  end
-
-  # Freeze to current time on specs tagged :freeze_current_time
-  before(:each, freeze_current_time: true) do
-    Timecop.freeze Time.now
-  end
-
-  # Always return to real time
-  after(:each) do
-    Timecop.return
-  end
-
-  after(:each) do
-    Elected.senado.release
-  end
-
   def wait_until(time)
     sleep 0.1 until Time.now >= time
   end
@@ -78,6 +51,23 @@ module TestingHelpers
 
   def wait_for_timeout(fraction)
     wait_until @start_time + (@timeout / 1_000.0) * fraction
+  end
+
+  def expect_instance_log_msg(logr_meth, msg)
+    subject.send logr_meth
+    expect_log_line "#{subject.class.name}.#{logr_meth} | #{msg}"
+  end
+
+  def expect_class_log_msg(logr_meth, msg)
+    subject.class.send logr_meth
+    expect_log_line "#{subject.class.name}.#{logr_meth} | #{msg}"
+  end
+
+  def expect_log_line(msg)
+    expect($logger.has_line?(msg)).to eq(true),
+                                      "expected #{$logger.lines.inspect}\n" +
+                                        "to have  [#{msg}]"
+
   end
 
 end
