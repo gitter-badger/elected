@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/simple-finance/elected.svg?branch=master)](https://travis-ci.org/simple-finance/elected)
 [![Code Climate](https://codeclimate.com/github/simple-finance/elected/badges/gpa.svg)](https://codeclimate.com/github/simple-finance/elected)
+[![security](https://hakiri.io/github/simple-finance/elected/master.svg)](https://hakiri.io/github/simple-finance/elected/master)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/simple-finance/elected?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Elected - A ruby distributed leader election through Redis locks. 
 
