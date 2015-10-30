@@ -37,16 +37,13 @@ module Elected
         log string, :error
       end
 
-      def log_prefix
-        length    = 60
-        prefix    = name
-        _, _, lbl = log_prefix_labels
-        prefix    += ".#{lbl}" if lbl
-        prefix    = prefix.rjust(length, ' ')[-length, length]
-        prefix    += ' T%s' % Thread.current.object_id.to_s[-4..-1] if ENV['LOG_THREAD_ID'] == 'true'
-        prefix    += ' C%02i:%02i' % [run_thread_count, thread_count] if ENV['LOG_THREAD_COUNT'] == 'true'
-        prefix    += ' | '
-        prefix
+      def log_prefix(length = 60)
+        prefixes = [name]
+        label    = log_prefix_labels.last
+        prefixes << ".#{label}" if label
+        prefixes << prefix.rjust(length, ' ')[-length, length]
+        prefixes << ' | '
+        prefixes.join('')
       end
 
       def run_thread_count
