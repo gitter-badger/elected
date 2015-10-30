@@ -3,6 +3,8 @@ require 'thread'
 module Elected
   class Senado
 
+    include Logging
+
     attr_accessor :key, :timeout
 
     def initialize(key = nil, timeout = nil)

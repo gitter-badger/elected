@@ -33,5 +33,6 @@ module Elected
 
 end
 
+require 'elected/logging'
 require 'elected/lider'
 require 'elected/senado'

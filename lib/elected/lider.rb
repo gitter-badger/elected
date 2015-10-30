@@ -3,6 +3,8 @@ require 'yaml'
 module Elected
   class Lider
 
+    include Logging
+
     attr_reader :info, :validity, :resource, :value, :created, :deadline, :diff
 
     def initialize(info, timeout)

@@ -18,6 +18,12 @@ unless Object.const_defined? :SPEC_HELPER_LOADED
       Elected.redis_urls = ENV['REDIS_URL']
     end
 
+    # Get a inspectable logger
+    c.before(:each, logging: true) do
+      $logger = double 'Logger'
+      Elected.logger = $logger
+    end
+
     # Freeze to current time on specs tagged :freeze_current_time
     c.before(:each, freeze_current_time: true) do
       Timecop.freeze Time.now
