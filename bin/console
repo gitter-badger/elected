@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'elected'
+
+E = Elected
+S = Elected::Senado
+
+require 'pry'
+ARGV.clear
+Pry.start
