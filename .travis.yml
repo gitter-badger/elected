@@ -6,8 +6,8 @@ jdk:
 rvm:
   - ruby-2.0.0-p598
   - ruby-2.2.0
-  - jruby-19mode
   - jruby-9.0.0.0
+  - jruby-head
 services:
   - redis-server
 env:
