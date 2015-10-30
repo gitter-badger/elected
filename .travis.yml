@@ -3,7 +3,6 @@ before_install: gem install bundler -v 1.10.6
 language: ruby
 jdk:
   - oraclejdk8
-cache: bundler
 rvm:
   - ruby-2.0.0-p598
   - ruby-2.2.0
