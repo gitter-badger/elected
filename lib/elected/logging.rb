@@ -38,11 +38,12 @@ module Elected
       end
 
       def log_prefix(length = 60)
-        prefixes = [name]
-        label    = log_prefix_labels.last
-        prefixes << label.rjust(length, ' ')[-length, length]
-        prefixes << ' | '
-        prefixes.join('')
+        prefix = name
+        labels = log_prefix_labels
+        prefix += ".#{labels.last}" if labels
+        prefix = prefix.rjust(length, ' ')[-length, length]
+        prefix += ' |'
+        prefix
       end
 
       def run_thread_count
