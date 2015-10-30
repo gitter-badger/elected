@@ -40,8 +40,7 @@ module Elected
       def log_prefix(length = 60)
         prefixes = [name]
         label    = log_prefix_labels.last
-        prefixes << ".#{label}" if label
-        prefixes << prefix.rjust(length, ' ')[-length, length]
+        prefixes << label.rjust(length, ' ')[-length, length]
         prefixes << ' | '
         prefixes.join('')
       end
