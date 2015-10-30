@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/simple-finance/elected.svg?branch=master)](https://travis-ci.org/simple-finance/elected)
+[![Code Climate](https://codeclimate.com/github/simple-finance/elected/badges/gpa.svg)](https://codeclimate.com/github/simple-finance/elected)
+
 # Elected - A ruby distributed leader election through Redis locks. 
 
 > Elect a leader out of many processes and run code only in one of your servers at a time.
@@ -61,17 +64,23 @@ Make sure you have at least 1 redis instances up.
 
 ## Disclaimer
 
-This code, like Redlock in which is based, implements an algorithm which is currently a proposal, it was not formally analyzed. Make sure to understand how it works before using it in your production environments. You can see discussion about this approach at [reddit](http://www.reddit.com/r/programming/comments/2nt0nq/distributed_lock_using_redis_implemented_in_ruby/).
+The hard work of securing a distributed lock is all done through the great [redlock](https://github.com/leandromoreira/redlock-rb) gem. Thanks to [Leandro Moreira](https://github.com/leandromoreira) for his hard work. 
+This code, thanks to Redlock, implements an algorithm which is currently a proposal, it was not formally analyzed. 
+Make sure to understand how it works before using it in your production environments. 
+You can see discussion about this approach at [reddit](http://www.reddit.com/r/programming/comments/2nt0nq/distributed_lock_using_redis_implemented_in_ruby/).
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. 
+Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. 
+To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/simple-finance/elected. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/simple-finance/elected. 
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
