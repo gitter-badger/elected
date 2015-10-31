@@ -8,6 +8,10 @@ unless Object.const_defined? :SPEC_HELPER_LOADED
   RSpec.configure do |c|
     c.include TestingHelpers
 
+    c.filter_run focus: true if FOCUSED
+    c.filter_run_excluding performance: true unless PERFORMANCE
+    Elected.logger.level = Logger::DEBUG if DEBUG
+
     # Setup defaults for testing
     c.before(:each) do
       Elected.key        = DEFAULT_KEY

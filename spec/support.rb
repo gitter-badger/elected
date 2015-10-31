@@ -4,6 +4,10 @@ require 'timecop'
 
 ENV['REDIS_URL'] ||= 'redis://localhost:6379/0'
 
+FOCUSED     = ENV['FOCUS'] == 'true'
+PERFORMANCE = ENV['PERFORMANCE'] == 'true'
+DEBUG       = ENV['DEBUG'] == 'true'
+
 DEFAULT_KEY     = 'test_elected'
 DEFAULT_TIMEOUT = 5_000
 

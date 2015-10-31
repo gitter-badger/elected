@@ -5,10 +5,13 @@ module Elected
 
     include Logging
 
-    attr_accessor :key, :timeout
+    attr_writer :key, :timeout
+    attr_reader :stats
 
     def initialize(key = nil, timeout = nil)
-      @key, @timeout = key, timeout
+      @key     = key
+      @timeout = timeout
+      @stats   = Stats.new :elected, :rejected, :missing, :released
     end
 
     def key
@@ -31,7 +34,11 @@ module Elected
     def release
       return false unless @leader
 
-      Elected.electorado.unlock @leader.info if @leader.current?
+      if @leader.current?
+        Elected.electorado.unlock @leader.info
+        @stats.increment :released
+      end
+
       @leader = false
     end
 
@@ -48,7 +55,11 @@ module Elected
     end
 
     def get_leader
-      return false unless @leader
+      unless @leader
+        @stats.increment :missing
+        return false
+      end
+
       return @leader if @leader.current?
 
       release
@@ -56,9 +67,13 @@ module Elected
 
     def set_leader
       found = Elected.electorado.lock key, timeout
-      return false unless found
-
-      @leader = Lider.new found, timeout
+      if found
+        @stats.increment :elected
+        @leader = Lider.new found, timeout
+      else
+        @stats.increment :rejected
+        false
+      end
     end
 
   end

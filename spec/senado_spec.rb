@@ -26,6 +26,10 @@ module Elected
       expect(subject.timeout).to eq custom_timeout
     end
 
+    it 'has stats' do
+      expect(subject.stats.to_s).to eq '#<Elected::Stats elected=0 missing=0 rejected=0 released=0>'
+    end
+
     context 'elections' do
 
       it 'can select a leader automatically on request' do
@@ -65,6 +69,16 @@ module Elected
         expect(sen2).to be_leader
         expect(sen3).to_not be_leader
         expect(sen1).to_not be_leader
+
+        # Release all
+        sen1.release
+        sen2.release
+        sen3.release
+
+        # get stats
+        expect(sen1.stats.count('elected')).to eq 1
+        expect(sen2.stats.count('elected')).to eq 1
+        expect(sen3.stats.count('elected')).to eq 1
       end
     end
 
