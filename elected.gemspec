@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'redlock', '0.1.3'
+  spec.add_dependency 'redlock'
   spec.add_dependency 'concurrent-ruby'
   spec.add_dependency 'pry'
 
